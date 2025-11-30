@@ -10,8 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-import java.util.List;
 import java.util.Random;
 
 @Service
@@ -31,8 +29,7 @@ public class StockService {
         var stockWebClient = StockHttpClientFactory.getStockClient(stock);
         var random = new Random();
 
-        // We're returning hardcoded value in order to showcase the caching functionality
-        return Mono.just(new WrappedResponseDto<>(List.of(new PriceDto("PLBSK0000017", random.nextLong(1, Long.MAX_VALUE)))));
+        return stockWebClient.getPrices();
     }
 
     @CacheEvict(value = "prices", allEntries = true)

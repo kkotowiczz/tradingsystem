@@ -11,7 +11,12 @@ import reactor.core.publisher.Mono;
 public final class GpwHttpClient extends StockHttpClient {
 
     public GpwHttpClient() {
-        super("http://localhost:3050", "tickers", "prices", "orders");
+        super(
+                System.getenv("WIREMOCK_URL") != null ? System.getenv("WIREMOCK_URL") : "http://localhost:3001",
+                "tickers",
+                "prices",
+                "orders"
+        );
     }
 
     private WebClient webClient = WebClient.builder()

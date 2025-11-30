@@ -16,9 +16,9 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableWireMock
-class StockControllerTest {
+class StockTickersTests {
     private WireMockServer wireMockServer;
-    private int port = 3050;
+    private int port = 3001;
     @Autowired
     private WebTestClient webTestClient;
 
@@ -58,30 +58,4 @@ class StockControllerTest {
                 .returnResult()
                 .getResponseBody();
     }
-
-//    @Test
-//    void getPrices() {
-//        var response = """
-//        {
-//            "results": [
-//                {
-//                    "isin": "PLBSK0000017",
-//                    "price": 314
-//                }
-//            ]
-//        }
-//        """;
-//
-//
-//        stubFor(WireMock.get(("/prices"))
-//                .willReturn(okJson(response)));
-//
-//        var entity = webTestClient.get().uri("/GPW/prices")
-//                .exchange()
-//                .expectStatus()
-//                .isOk()
-//                .expectBody(WrappedResponseDto.class)
-//                .returnResult()
-//                .getResponseBody();
-//    }
 }
