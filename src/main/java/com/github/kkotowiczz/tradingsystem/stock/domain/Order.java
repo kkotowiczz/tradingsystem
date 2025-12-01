@@ -45,6 +45,17 @@ public class Order {
 
     public Order() {}
 
+    public Order(BigInteger orderId, BigInteger accountId, String isin, TradingSide side, Currency tradeCurrency, Long quantity, Instant executedTime, Instant registrationTime) {
+        this.orderId = orderId;
+        this.accountId = accountId;
+        this.isin = isin;
+        this.side = side;
+        this.tradeCurrency = tradeCurrency;
+        this.quantity = quantity;
+        this.executedTime = executedTime;
+        this.registrationTime = registrationTime;
+    }
+
     public BigInteger getOrderId() {
         return orderId;
     }

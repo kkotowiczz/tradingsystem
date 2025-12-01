@@ -1,7 +1,6 @@
 package com.github.kkotowiczz.tradingsystem.stock;
 
 import com.github.kkotowiczz.tradingsystem.stock.domain.Currency;
-import com.github.kkotowiczz.tradingsystem.stock.domain.Order;
 import com.github.kkotowiczz.tradingsystem.stock.domain.OrderType;
 import com.github.kkotowiczz.tradingsystem.stock.domain.TradingSide;
 import com.github.kkotowiczz.tradingsystem.stock.dto.CreateOrderDto;

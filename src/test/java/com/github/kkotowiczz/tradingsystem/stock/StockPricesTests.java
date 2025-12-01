@@ -6,19 +6,23 @@ import com.github.kkotowiczz.tradingsystem.stock.dto.WrappedResponseDto;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.wiremock.spring.EnableWireMock;
 
@@ -30,13 +34,15 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 @EnableCaching
 @ImportAutoConfiguration(classes = {
         CacheAutoConfiguration.class,
-        RedisAutoConfiguration.class
+        RedisAutoConfiguration.class,
+        R2dbcAutoConfiguration.class
 })
 @EnableWireMock
 public class StockPricesTests extends AbstractIntegrationTest {
 
     private WireMockServer wireMockServer;
     private int port = 3001;
+
 
     @Autowired
     private StockService stockService;
