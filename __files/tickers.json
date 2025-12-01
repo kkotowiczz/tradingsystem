@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "name": "ING Bank Śląski",
+      "ticker": "INGBSK",
+      "isin": "PLBSK0000017",
+      "tradeCurrency": "PLN",
+      "mic": "XWAR"
+    }
+  ]
+}

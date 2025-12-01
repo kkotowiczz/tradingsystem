@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/tickers"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "tickers.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

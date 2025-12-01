@@ -1,5 +1,6 @@
 package com.github.kkotowiczz.tradingsystem.stock;
 
+import com.github.kkotowiczz.tradingsystem.stock.domain.StockExchange;
 import com.github.kkotowiczz.tradingsystem.stock.dto.PriceDto;
 import com.github.kkotowiczz.tradingsystem.stock.dto.TickerDto;
 import com.github.kkotowiczz.tradingsystem.stock.dto.WrappedResponseDto;
