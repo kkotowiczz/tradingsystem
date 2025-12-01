@@ -6,23 +6,27 @@ import com.github.kkotowiczz.tradingsystem.stock.dto.PriceDto;
 import com.github.kkotowiczz.tradingsystem.stock.dto.TickerDto;
 import com.github.kkotowiczz.tradingsystem.stock.dto.WrappedResponseDto;
 import com.github.kkotowiczz.tradingsystem.stock.http.StockHttpClientFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.kkotowiczz.tradingsystem.stock.messaging.OrderCreatedEvent;
+import com.github.kkotowiczz.tradingsystem.stock.messaging.OrderEventProducer;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.Random;
+import java.math.BigInteger;
+import java.time.Instant;
 
 @Service
 public class StockService {
 
     private final StockRepository stockRepository;
+    private final OrderEventProducer orderEventProducer;
     private static final int FIFTEEN_MINUTES = 15 * 60 * 1000;
 
-    public StockService(StockRepository stockRepository) {
+    public StockService(StockRepository stockRepository, OrderEventProducer orderEventProducer) {
         this.stockRepository = stockRepository;
+        this.orderEventProducer = orderEventProducer;
     }
 
     public Mono<WrappedResponseDto<TickerDto>> getTickers(StockExchange stock) {
@@ -41,6 +45,7 @@ public class StockService {
     }
 
     public Mono<WrappedResponseDto<?>> createOrder(CreateOrderDto dto) {
+        orderEventProducer.sendOrderCreatedEvent(new OrderCreatedEvent(BigInteger.ONE, Instant.now()));
         return null;
     }
 

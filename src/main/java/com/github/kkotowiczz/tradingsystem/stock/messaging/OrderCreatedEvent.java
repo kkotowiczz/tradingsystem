@@ -31,4 +31,12 @@ public class OrderCreatedEvent {
     public void setRegistrationTime(Instant registrationTime) {
         this.registrationTime = registrationTime;
     }
+
+    @Override
+    public String toString() {
+        return "OrderCreatedEvent{" +
+                "orderId=" + orderId +
+                ", registrationTime=" + registrationTime +
+                '}';
+    }
 }

@@ -19,6 +19,7 @@ public class AbstractIntegrationTest {
         postgres.setPortBindings(List.of("4444:5432"));
         postgres.addEnv("POSTGRES_PASSWORD", "PASSWORD");
         postgres.start();
+        kafka.setPortBindings(List.of("2222:29092"));
         kafka.start();
     }
     @DynamicPropertySource
