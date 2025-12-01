@@ -25,6 +25,9 @@ services:
       - SPRING_DATA_REDIS_PORT=6379
       - SPRING_DATA_REDIS_DATABASE=0
       - WIREMOCK_URL=http://wiremock:8080
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://db:5432/testdb
+      - SPRING_LIQUIBASE_USER=user
+      - SPRING_LIQUIBASE_PASSWORD=password
 
     ports:
       - "8080:8080"

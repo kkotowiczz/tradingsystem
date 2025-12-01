@@ -4,12 +4,48 @@ databaseChangeLog:
       author: kkotowiczz
       changes:
         - createTable:
-            tableName: test
+            tableName: ORDERS
             columns:
               - column:
-                  name: ID
-                  type: INT
+                  name: ORDER_ID
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: ACCOUNT_ID
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ISIN
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SIDE
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CURRENCY
+                  type: VARCHAR(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: QUANTITY
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EXECUTION_PRICE
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REGISTRATION_TIME
+                  type: TIMESTAMP
+              - column:
+                  name: EXECUTION_TIME
+                  type: TIMESTAMP

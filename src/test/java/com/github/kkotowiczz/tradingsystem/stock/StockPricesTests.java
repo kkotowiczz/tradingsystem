@@ -6,10 +6,8 @@ import com.github.kkotowiczz.tradingsystem.stock.dto.WrappedResponseDto;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +20,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.utility.DockerImageName;
 import org.wiremock.spring.EnableWireMock;
-
-import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
@@ -39,7 +33,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
         RedisAutoConfiguration.class
 })
 @EnableWireMock
-public class StockPricesTests {
+public class StockPricesTests extends AbstractIntegrationTest {
 
     private WireMockServer wireMockServer;
     private int port = 3001;
@@ -51,13 +45,6 @@ public class StockPricesTests {
     @Autowired
     private WebTestClient webTestClient;
 
-    private static GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:latest"));
-
-    @BeforeAll
-    public static void init() {
-        redis.setPortBindings(List.of("5555:6379"));
-        redis.start();
-    }
 
     @BeforeEach
     public void configureWireMock() {
@@ -72,11 +59,6 @@ public class StockPricesTests {
     public void clearCache() {
         redisCacheManager.getCache("prices").clear();
         wireMockServer.stop();
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        redis.close();
     }
 
     @Test

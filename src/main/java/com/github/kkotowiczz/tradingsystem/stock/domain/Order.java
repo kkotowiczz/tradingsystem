@@ -20,13 +20,13 @@ public class Order {
     @Column(name = "ORDER_ID", columnDefinition = "BIGINT")
     private BigInteger orderId;
 
-    @Column(name = "ACCOUNT_ID", columnDefinition = "BIGINT")
+    @Column(name = "ACCOUNT_ID", columnDefinition = "BIGINT", nullable = false)
     private BigInteger accountId;
 
-    @Column(name = "ISIN", columnDefinition = "VARCHAR(50)")
+    @Column(name = "ISIN", columnDefinition = "VARCHAR(50)", nullable = false)
     private String isin;
 
-    @Column(name = "SIDE", columnDefinition = "VARCHAR(10)")
+    @Column(name = "SIDE", columnDefinition = "VARCHAR(10)", nullable = false)
     @Enumerated(EnumType.STRING)
     private TradingSide side;
 
@@ -37,12 +37,75 @@ public class Order {
     @Column(name = "QUANTITY", columnDefinition = "BIGINT")
     private Long quantity;
 
-    @Column(name = "EXPIRES_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant expiresAt;
+    @Column(name = "EXECUTION_TIME", columnDefinition = "TIMESTAMP")
+    private Instant executedTime;
 
-    @Column(name = "ORDER_TYPE", columnDefinition = "VARCHAR(3)")
-    @Enumerated(EnumType.STRING)
-    private OrderType orderType;
+    @Column(name = "REGISTRATION_TIME", columnDefinition = "TIMESTAMP")
+    private Instant registrationTime;
 
+    public Order() {}
 
+    public BigInteger getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(BigInteger orderId) {
+        this.orderId = orderId;
+    }
+
+    public BigInteger getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(BigInteger accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public void setIsin(String isin) {
+        this.isin = isin;
+    }
+
+    public TradingSide getSide() {
+        return side;
+    }
+
+    public void setSide(TradingSide side) {
+        this.side = side;
+    }
+
+    public Currency getTradeCurrency() {
+        return tradeCurrency;
+    }
+
+    public void setTradeCurrency(Currency tradeCurrency) {
+        this.tradeCurrency = tradeCurrency;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+
+    public Instant getExecutedTime() {
+        return executedTime;
+    }
+
+    public void setExecutedTime(Instant executedTime) {
+        this.executedTime = executedTime;
+    }
+
+    public Instant getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public void setRegistrationTime(Instant registrationTime) {
+        this.registrationTime = registrationTime;
+    }
 }
