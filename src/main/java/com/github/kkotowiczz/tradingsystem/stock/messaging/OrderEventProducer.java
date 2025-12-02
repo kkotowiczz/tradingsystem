@@ -1,9 +1,11 @@
 package com.github.kkotowiczz.tradingsystem.stock.messaging;
 
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class OrderEventProducer {
@@ -14,7 +16,7 @@ public class OrderEventProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendOrderCreatedEvent(OrderCreatedEvent event) {
-        kafkaTemplate.send(TOPIC, event);
+    public CompletableFuture<SendResult<BigInteger, OrderCreatedEvent>> sendOrderCreatedEvent(OrderCreatedEvent event) {
+        return kafkaTemplate.send(TOPIC, event);
     }
 }

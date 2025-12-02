@@ -21,6 +21,5 @@ public abstract sealed class StockHttpClient permits GpwHttpClient {
 
     public abstract Mono<WrappedResponseDto<TickerDto>> getTickers();
     public abstract Mono<WrappedResponseDto<PriceDto>> getPrices();
-    public abstract void createOrder();
     public abstract WebClient getWebClient();
 }

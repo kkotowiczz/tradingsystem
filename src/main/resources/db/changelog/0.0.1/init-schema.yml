@@ -41,11 +41,12 @@ databaseChangeLog:
               - column:
                   name: EXECUTION_PRICE
                   type: BIGINT
-                  constraints:
-                    nullable: false
+              - column:
+                  name: ORDER_STATUS
+                  type: VARCHAR(50)
               - column:
                   name: REGISTRATION_TIME
                   type: TIMESTAMP
               - column:
-                  name: EXECUTION_TIME
+                  name: EXECUTED_TIME
                   type: TIMESTAMP

@@ -6,22 +6,21 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.math.BigInteger;
 import java.time.Instant;
 
 @Entity
-@Table(name = "ORDERS")
+@Table("ORDERS")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID", columnDefinition = "BIGINT")
-    private BigInteger orderId;
+    private Long orderId;
 
     @Column(name = "ACCOUNT_ID", columnDefinition = "BIGINT", nullable = false)
-    private BigInteger accountId;
+    private Long accountId;
 
     @Column(name = "ISIN", columnDefinition = "VARCHAR(50)", nullable = false)
     private String isin;
@@ -32,7 +31,10 @@ public class Order {
 
     @Column(name = "CURRENCY", columnDefinition = "VARCHAR(3)")
     @Enumerated(EnumType.STRING)
-    private Currency tradeCurrency;
+    private Currency currency;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Column(name = "QUANTITY", columnDefinition = "BIGINT")
     private Long quantity;
@@ -45,30 +47,31 @@ public class Order {
 
     public Order() {}
 
-    public Order(BigInteger orderId, BigInteger accountId, String isin, TradingSide side, Currency tradeCurrency, Long quantity, Instant executedTime, Instant registrationTime) {
+    public Order(Long orderId, Long accountId, String isin, TradingSide side, Currency currency, OrderStatus orderStatus, Long quantity, Instant executedTime, Instant registrationTime) {
         this.orderId = orderId;
         this.accountId = accountId;
         this.isin = isin;
         this.side = side;
-        this.tradeCurrency = tradeCurrency;
+        this.currency = currency;
+        this.orderStatus = orderStatus;
         this.quantity = quantity;
         this.executedTime = executedTime;
         this.registrationTime = registrationTime;
     }
 
-    public BigInteger getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(BigInteger orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public BigInteger getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(BigInteger accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
@@ -88,12 +91,20 @@ public class Order {
         this.side = side;
     }
 
-    public Currency getTradeCurrency() {
-        return tradeCurrency;
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public void setTradeCurrency(Currency tradeCurrency) {
-        this.tradeCurrency = tradeCurrency;
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Long getQuantity() {

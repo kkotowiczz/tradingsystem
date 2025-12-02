@@ -4,9 +4,11 @@ import com.github.kkotowiczz.tradingsystem.stock.domain.Order;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 import java.math.BigInteger;
 
 @Repository
-public interface StockRepository extends R2dbcRepository<Order, BigInteger> {
+public interface StockRepository extends R2dbcRepository<Order, Long> {
+    Mono<Order> findByOrderIdAndAccountId(Long orderId, Long accountId);
 }
