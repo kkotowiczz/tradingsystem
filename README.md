@@ -12,6 +12,7 @@ Simple MVP of a conceptual trading system built with:
 
 
 # Default mappings for docker compose:
+```
 +------------+----------------+-----------------+
 | Name       | Container Port | Mapping         |
 +------------+----------------+-----------------+
@@ -27,6 +28,7 @@ Simple MVP of a conceptual trading system built with:
 +------------+----------------+-----------------+
 | app        | 8080           | 172.18.0.1:8080 |
 +------------+----------------+-----------------+
+```
 
 In order to deploy project with all of dependencies just run `./gradlew composeUp`.
 
